@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
     private ArrayList<String> mTitles = new ArrayList<>();
 
 
+    // onCreate Method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
