@@ -22,7 +22,6 @@ public class PharmaciesFragment extends BaseFragment {
         // Inflate the layout for this fragment
         view =  inflater.inflate(R.layout.search_pharmacies, container, false);
         getActivity().setTitle("Pharmacies");
-
         return view;
     }
 }

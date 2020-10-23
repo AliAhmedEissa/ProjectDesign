@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.ddd.Home_map.HomeFragment;
 import com.example.ddd.Home_map.MapFragment;
+import com.example.ddd.Home_map.PharmaciesDrFragment;
 import com.example.ddd.Orders.OrdersFragment;
 
 import java.util.ArrayList;
