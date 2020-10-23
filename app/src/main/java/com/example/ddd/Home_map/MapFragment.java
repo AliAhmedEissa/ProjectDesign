@@ -8,10 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.ddd.Base.BaseFragment;
 import com.example.ddd.R;
 
 
-public class MapFragment extends Fragment {
+public class MapFragment extends BaseFragment {
 
 
     View view ;

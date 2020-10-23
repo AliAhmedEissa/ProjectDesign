@@ -4,4 +4,5 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 public class Home_Map_VM extends ViewModel {
+
 }

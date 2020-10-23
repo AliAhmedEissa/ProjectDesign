@@ -1,6 +1,7 @@
 package com.example.ddd;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,13 +26,13 @@ import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
 
 public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMenuClickListener {
 
+    Toolbar mainToolbar;
     MeowBottomNavigation bottomNavigation;
     CardView button_search;
 
     private MenuAdapter mMenuAdapter;
     private ViewHolder mViewHolder;
     private ArrayList<String> mTitles = new ArrayList<>();
-
 
     // onCreate Method
     @Override
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         setContentView(R.layout.activity_main);
         bottomNavigation = findViewById(R.id.bottonNav);
         button_search = findViewById(R.id.Search_btn);
+        mainToolbar = findViewById(R.id.toolbar);
         mTitles = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.menuOptions)));
 
         // Initialize the views
@@ -57,13 +59,11 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         mMenuAdapter.setViewSelected(0,true);
         setTitle("Home");
 
-
         bottomNavigation.add(new MeowBottomNavigation.Model(1, R.drawable.ic_home));
         bottomNavigation.add(new MeowBottomNavigation.Model(2, R.drawable.ic_map));
         bottomNavigation.add(new MeowBottomNavigation.Model(3, R.drawable.ic_orders));
 
-
-        bottomNavigation.setOnShowListener(new Function1<MeowBottomNavigation.Model, Unit>() {
+        bottomNavigation.setOnClickMenuListener(new Function1<MeowBottomNavigation.Model, Unit>() {
             @Override
             public Unit invoke(MeowBottomNavigation.Model model) {
                 switch (model.getId()) {
@@ -75,15 +75,14 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
                         break;
                     case 3:
                         goToFragment(new OrdersFragment());
+                        break;
                 }
                 return null;
             }
         });
-
+        goToFragment(new HomeFragment());
 
         bottomNavigation.show(1, false);
-
-
     }
 
     private void handleToolbar() {
@@ -119,10 +118,11 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
     }
 
     private void goToFragment(Fragment fragment) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction().addToBackStack(null);
-
-
-        transaction.replace(R.id.fragment_container, fragment).commit();
+        FragmentTransaction transaction = getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null);
+        transaction.replace(R.id.fragment_container, fragment)
+                .commit();
     }
 
     @Override
@@ -134,12 +134,15 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         mMenuAdapter.setViewSelected(position,true);
 
         // Navigate to the right fragment
+
         switch (position) {
             case 0:
-                goToFragment(new HomeFragment());
+                goToFragment(new ProfileFragment());
+                bottomNavigation.setVisibility(View.GONE);
                 break;
             case 1:
-                goToFragment(new MapFragment());
+                goToFragment(new PharmaciesDrFragment());
+                bottomNavigation.setVisibility(View.GONE);
                 break;
             case 2:
                 goToFragment(new OrdersFragment());
@@ -163,5 +166,21 @@ public class MainActivity extends AppCompatActivity implements DuoMenuView.OnMen
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        mainToolbar.setVisibility(View.VISIBLE);
+        bottomNavigation.setVisibility(View.VISIBLE);
 
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+
+        } else {
+            getSupportFragmentManager().popBackStack();
+
+        }
+
+    }
 }

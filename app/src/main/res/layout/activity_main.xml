@@ -6,30 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    app:clickToCloseScale="0.7"
     app:contentScaleClosed="1.0"
     app:contentScaleOpen="0.8"
-    app:clickToCloseScale="0.7"
-    app:menuScaleClosed="1.1"
-    app:menuScaleOpen="1.0"
     app:marginFactor="0.6"
-
-    >
+    app:menuScaleClosed="1.1"
+    app:menuScaleOpen="1.0">
 
     <nl.psdcompany.duonavigationdrawer.views.DuoMenuView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@android:color/white"
         android:orientation="vertical"
         android:tag="@string/tag_menu"
         app:footer="@layout/duo_view_footer"
-        app:header="@layout/duo_view_header"
-        android:background="@android:color/white"
-
-
-        />
-
-
+        app:header="@layout/duo_view_header" />
 
 
     <LinearLayout
@@ -38,13 +31,9 @@
         android:orientation="vertical"
         android:tag="@string/tag_content">
 
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-
-            >
+            android:layout_height="match_parent">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -52,53 +41,37 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="#4ca4fa"
                 android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-
+                app:layout_constraintTop_toTopOf="parent"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
             <FrameLayout
                 android:id="@+id/fragment_container"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintTop_toBottomOf="@id/toolbar"
-                app:layout_constraintBottom_toTopOf="@id/bottonNav"
                 android:background="#4ca4fa"
-                />
-
-
-
+                app:layout_constraintBottom_toTopOf="@id/bottonNav"
+                app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
             <com.etebarian.meowbottomnavigation.MeowBottomNavigation
                 android:id="@+id/bottonNav"
                 android:layout_width="wrap_content"
-                android:background="@color/colorPrimaryDark"
                 android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:mbn_backgroundBottomColor="#ffffff"
                 app:mbn_countBackgroundColor="#ff6f00"
                 app:mbn_countTextColor="#ffffff"
                 app:mbn_defaultIconColor="#2f424242"
                 app:mbn_rippleColor="#2f424242"
                 app:mbn_selectedIconColor="@color/colorPrimaryDark"
-                app:mbn_shadowColor="#1f212121 "
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-
-                />
+                app:mbn_shadowColor="#1f212121 " />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-
     </LinearLayout>
-
-
-
-
-
-
-
 
 </nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout>

@@ -4,6 +4,8 @@
     <color name="colorPrimaryT">#004CA4FA</color>
     <color name="colorPrimaryDark">#4ca4fa</color>
     <color name="colorAccent">#FFFFBB33</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorWhite">#fff</color>
     <color name="gray">#BDBDBD</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#FFFFFF</color>
 </resources>
