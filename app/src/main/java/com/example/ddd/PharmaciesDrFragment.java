@@ -2,14 +2,11 @@ package com.example.ddd;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ddd.Base.BaseFragment;
-import com.example.ddd.R;
 
 public class PharmaciesDrFragment extends BaseFragment {
 
@@ -22,7 +19,7 @@ public class PharmaciesDrFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_pharmacies_dr, container, false);
+        view = inflater.inflate(R.layout.fr_drawer_pharmacies, container, false);
 
         return view;
     }

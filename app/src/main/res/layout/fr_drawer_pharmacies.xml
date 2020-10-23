@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
         <include
-            layout="@layout/item_pharmacies_dr"
+            layout="@layout/drawer_pharmacies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -21,14 +21,14 @@
             android:layout_marginEnd="10dp" />
 
         <include
-            layout="@layout/item_pharmacies_dr"
+            layout="@layout/drawer_pharmacies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="10dp" />
         <include
-            layout="@layout/item_pharmacies_dr"
+            layout="@layout/drawer_pharmacies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -36,7 +36,7 @@
             android:layout_marginEnd="10dp" />
 
         <include
-            layout="@layout/item_pharmacies_dr"
+            layout="@layout/drawer_pharmacies"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
