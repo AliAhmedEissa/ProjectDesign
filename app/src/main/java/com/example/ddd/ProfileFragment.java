@@ -29,6 +29,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
     EditText profileUserNameEdit, profileEmailEdit, profilePhoneEdit;
     Button changePasswordBtn;
 
+
     Dialog dialog;
 
     public ProfileFragment() {
@@ -44,6 +45,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         initView(view);
         getActivity().setTitle("Profile");
         profileCancelText.setVisibility(View.GONE);
+
         return view;
     }
 
@@ -63,6 +65,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         changePasswordBtn = view.findViewById(R.id.changePasswordBtn);
         changePasswordBtn.setOnClickListener(this);
         profileEditText.setOnClickListener(this);
+
 
     }
 
@@ -99,6 +102,7 @@ public class ProfileFragment extends BaseFragment implements View.OnClickListene
         }
         else if (view.getId() == R.id.profileEditText){
             profileCancelText.setVisibility(View.VISIBLE);
+            profileEditText.setText("Save");
 
         }
 
