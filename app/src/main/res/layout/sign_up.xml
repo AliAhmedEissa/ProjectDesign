@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:layout_below="@id/include"
-        android:layout_marginTop="-100dp"
+        android:layout_marginTop="-90dp"
         android:layout_marginEnd="15dp"
         android:background="@color/colorWhite"
         app:cardCornerRadius="15dp">
@@ -47,7 +47,8 @@
                 android:hint=" User Name"
                 android:inputType="text"
                 android:paddingLeft="10dp"
-                app:startIconDrawable="@drawable/ic_person">
+                app:startIconDrawable="@drawable/ic_person"
+                app:startIconTint="@color/gray">
 
                 <EditText
                     android:id="@+id/Suser_name"
@@ -65,7 +66,8 @@
                 android:hint=" E-Mail"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
-                app:startIconDrawable="@drawable/ic_email">
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="@color/gray">
 
                 <EditText
                     android:id="@+id/Semail"
@@ -83,7 +85,8 @@
                 android:hint=" Phone number"
                 android:inputType="number"
                 android:paddingLeft="10dp"
-                app:startIconDrawable="@drawable/ic_phone">
+                app:startIconDrawable="@drawable/ic_phone"
+                app:startIconTint="@color/gray">
 
                 <EditText
                     android:id="@+id/Sphone"
@@ -102,7 +105,8 @@
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_lock">
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconTint="@color/gray">
 
                 <EditText
                     android:id="@+id/Spassword"
@@ -117,12 +121,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:backgroundTint="@color/colorPrimary"
-                android:drawableLeft="@drawable/ic_lock"
                 android:hint="Confirm Password"
                 android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_lock">
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconTint="@color/gray">
 
                 <EditText
                     android:id="@+id/Sconfirm_pass"
@@ -159,7 +163,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView

@@ -48,7 +48,8 @@
                 android:hint=" E-Mail"
                 android:inputType="textEmailAddress"
                 android:paddingLeft="10dp"
-                app:startIconDrawable="@drawable/ic_email">
+                app:startIconDrawable="@drawable/ic_email"
+                app:startIconTint="@color/gray">
 
                 <EditText
                     android:id="@+id/Lemail"
@@ -61,13 +62,14 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="6dp"
                 android:backgroundTint="@color/colorPrimary"
                 android:hint="Password"
                 android:inputType="numberPassword"
                 android:paddingLeft="10dp"
                 app:passwordToggleEnabled="true"
-                app:startIconDrawable="@drawable/ic_lock">
+                app:startIconDrawable="@drawable/ic_lock"
+                app:startIconTint="@color/gray">
 
                 <EditText
                     android:id="@+id/Lpassword"
@@ -80,7 +82,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:gravity="end"
                 android:text="Forgot Password !"
                 android:textColor="@color/colorPrimary" />
@@ -112,7 +114,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="10dp"
                 android:orientation="horizontal">
 
                 <TextView

@@ -22,13 +22,11 @@ public class MapFragment extends BaseFragment {
     }
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fr_map, container, false);
+        view = inflater.inflate(R.layout.sign_up, container, false);
 
 
 
