@@ -23,9 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 
-import nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout;
-import nl.psdcompany.duonavigationdrawer.views.DuoMenuView;
-import nl.psdcompany.duonavigationdrawer.widgets.DuoDrawerToggle;
+
 
 public class MainActivity extends AppCompatActivity {
 

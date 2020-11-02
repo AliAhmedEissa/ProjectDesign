@@ -61,7 +61,6 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'com.github.AliAhmedEissa:NavigationDrawerLib:a94c9cb18a'
 
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
