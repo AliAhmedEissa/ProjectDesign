@@ -12,17 +12,37 @@ android {
         versionName "1.0"
    //     multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+        debug{
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+        }
+
+        android {
+            splits {
+                abi {
+                    enable true
+                    reset()
+                    include 'x86', 'x86_64', 'arm64-v8a', 'armeabi-v7a'
+                    universalApk false
+                }
+            }
         }
 
     }
@@ -65,4 +85,6 @@ dependencies {
 
     // Circle Image
     implementation 'de.hdodenhof:circleimageview:2.1.0'
+
+    implementation 'com.facebook.fresco:fresco:2.3.0'
 }

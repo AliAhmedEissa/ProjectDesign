@@ -1,80 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    app:clickToCloseScale="0.7"
-    app:contentScaleClosed="1.0"
-    app:contentScaleOpen="0.8"
-    app:marginFactor="0.6"
-    app:menuScaleClosed="1.1"
-    app:menuScaleOpen="1.0">
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity"
+    tools:openDrawer="start">
 
-    <nl.psdcompany.duonavigationdrawer.views.DuoMenuView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:orientation="vertical"
-        android:tag="@string/tag_menu"
-        app:footer="@layout/duo_view_footer"
-        app:header="@layout/duo_view_header" />
-
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:tag="@string/tag_content">
+        android:background="@color/colorPrimary">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/TT"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:titleTextColor="@color/white"
+            />
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#4ca4fa"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-            <FrameLayout
-                android:id="@+id/fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:background="#4ca4fa"
-                app:layout_constraintBottom_toTopOf="@id/bottonNav"
-                app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-            <com.etebarian.meowbottomnavigation.MeowBottomNavigation
-                android:id="@+id/bottonNav"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:mbn_backgroundBottomColor="#ffffff"
-                app:mbn_countBackgroundColor="#ff6f00"
-                app:mbn_countTextColor="#ffffff"
-                app:mbn_defaultIconColor="#2f424242"
-                app:mbn_rippleColor="#2f424242"
-                app:mbn_selectedIconColor="@color/colorPrimaryDark"
-                app:mbn_shadowColor="#1f212121 " />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            />
 
 
+        <com.etebarian.meowbottomnavigation.MeowBottomNavigation
+            android:id="@+id/bottonNav"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/TT"
+            android:layout_alignParentBottom="true"
+            app:mbn_backgroundBottomColor="#ffffff"
+            app:mbn_countBackgroundColor="#ff6f00"
+            app:mbn_countTextColor="#ffffff"
+            app:mbn_defaultIconColor="#2f424242"
+            app:mbn_rippleColor="#2f424242"
+            app:mbn_selectedIconColor="@color/colorPrimaryDark"
+            app:mbn_shadowColor="#1f212121 "
+            />
+
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        android:background="@color/white"
+        app:menu="@menu/drawer_menu">
+
+    </com.google.android.material.navigation.NavigationView>
 
 
-</nl.psdcompany.duonavigationdrawer.views.DuoDrawerLayout>
+
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>

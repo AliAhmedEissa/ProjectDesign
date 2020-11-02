@@ -88,8 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:gravity="center"
-                    android:paddingStart="70dp"
+                    android:gravity="end"
                     android:text="250.00$"
                     android:textColor="@android:color/black"
                     android:textSize="16sp" />
