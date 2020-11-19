@@ -9,7 +9,7 @@
     android:weightSum="5">
 
     <ImageView
-        android:id="@+id/delete_"
+        android:id="@+id/remove"
         android:layout_width="35dp"
         android:layout_height="match_parent"
         android:layout_marginTop="5dp"
@@ -18,10 +18,9 @@
         android:contentDescription="TODO"
         android:src="@drawable/ic_delete"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/Search_editText" />
+        app:layout_constraintTop_toTopOf="@id/search" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Search_editText"
         style="@style/inputText"
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -34,6 +33,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:id="@+id/search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Search"
@@ -57,11 +57,13 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/minus"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/minus" />
 
         <TextView
+            android:id="@+id/number"
             android:layout_width="wrap_content"
             android:layout_height="25dp"
             android:gravity="center"
@@ -70,6 +72,7 @@
             android:textSize="20sp" />
 
         <ImageView
+            android:id="@+id/plus"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/plus" />

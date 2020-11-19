@@ -1,8 +1,12 @@
 package com.example.ddd.Home_map;
 
+import android.annotation.SuppressLint;
+import android.location.Location;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +29,8 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
     MapView mapView ;
 
     GoogleMap googleMap ;
+    Home_Map_VM Vm ;
+
 
     public MapFragment() {
         // Required empty public constructor
@@ -35,6 +41,8 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Vm = new ViewModelProvider(getActivity()).get(Home_Map_VM.class);
+
         view = inflater.inflate(R.layout.fr_map, container, false);
 
         mapView = view.findViewById(R.id.map);
@@ -47,14 +55,30 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
         return view;
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
 
         this.googleMap =googleMap;
+        googleMap.setMyLocationEnabled(true);
+
+        Vm.MyLocation.observe(getActivity(), new Observer<Location>() {
+            @Override
+            public void onChanged(Location location) {
+                if(location!=null){
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(),
+                           location.getLongitude())));
+                    addMarker(location.getLatitude(),location.getLongitude(),"my location");
+
+                }
+            }
+        });
+
+
+
+
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
     }
 
     @Override
@@ -85,5 +109,14 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
+    }
+
+    private void addMarker(double latitude, double longitude, String title) {
+
+        googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
+                .title(title).flat(true));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude),10));
+
+
     }
 }
