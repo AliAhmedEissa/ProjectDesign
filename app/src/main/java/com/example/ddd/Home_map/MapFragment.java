@@ -27,7 +27,6 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
 
     View view ;
     MapView mapView ;
-
     GoogleMap googleMap ;
     Home_Map_VM Vm ;
 
@@ -45,39 +44,42 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
 
         view = inflater.inflate(R.layout.fr_map, container, false);
 
-        mapView = view.findViewById(R.id.map);
-
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(this);
-
-
+        init(savedInstanceState);
 
         return view;
     }
 
+
     @SuppressLint("MissingPermission")
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         this.googleMap =googleMap;
         googleMap.setMyLocationEnabled(true);
+
+        if(Vm.MyLocation.getValue()!=null){
+            googleMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(Vm.MyLocation.getValue().getLatitude(),
+                    Vm.MyLocation.getValue().getLongitude())));
+            addMarker(Vm.MyLocation.getValue().getLatitude(),Vm.MyLocation.getValue().getLongitude(),"my location");
+        }
+
 
         Vm.MyLocation.observe(getActivity(), new Observer<Location>() {
             @Override
             public void onChanged(Location location) {
                 if(location!=null){
-                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(),
-                           location.getLongitude())));
-                    addMarker(location.getLatitude(),location.getLongitude(),"my location");
 
                 }
             }
         });
 
 
+    }
 
+    private void init(Bundle savedInstanceState) {
 
-        // Add a marker in Sydney and move the camera
+        mapView = view.findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);
+        mapView.getMapAsync(this);
 
     }
 
@@ -111,6 +113,8 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
         mapView.onLowMemory();
     }
 
+
+
     private void addMarker(double latitude, double longitude, String title) {
 
         googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
@@ -119,4 +123,6 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
 
 
     }
+
+
 }

@@ -2,6 +2,7 @@ package com.example.ddd.Home_map;
 
 import android.annotation.SuppressLint;
 import android.app.Application;
+import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -34,12 +35,14 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
     public MutableLiveData<Boolean> radio = new MutableLiveData<>(false);
 
     GoogleApiClient googleApiClient;
-    Location location;
     LocationRequest locationRequest;
+
+    Context context ;
 
 
     public Home_Map_VM(@NonNull Application application) {
         super(application);
+        context = application.getApplicationContext();
         buildApiClient();
 
     }
@@ -66,11 +69,11 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
-
         locationRequest.setSmallestDisplacement(50);
         locationRequest.setFastestInterval(1000);
         locationRequest.setInterval(1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        LocationServices.getFusedLocationProviderClient(context);
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
 
     }
