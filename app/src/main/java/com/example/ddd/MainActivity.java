@@ -48,12 +48,6 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        if (IsLocationPermissionGranted()) {
-
-        } else {
-            RequestLocationPermission();
-        }
-
         bottomNavigation = findViewById(R.id.bottonNav);
         button_search = findViewById(R.id.Search_btn);
         navView = findViewById(R.id.nav_view);
@@ -68,7 +62,11 @@ public class MainActivity extends BaseActivity {
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
+        if (IsLocationPermissionGranted()) {
 
+        } else {
+            RequestLocationPermission();
+        }
 
 
         setTitle("Home");
