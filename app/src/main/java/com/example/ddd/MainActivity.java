@@ -48,17 +48,18 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (IsLocationPermissionGranted()) {
+
+        } else {
+            RequestLocationPermission();
+        }
+
         bottomNavigation = findViewById(R.id.bottonNav);
         button_search = findViewById(R.id.Search_btn);
         navView = findViewById(R.id.nav_view);
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
 
-        if (IsLocationPermissionGranted()) {
-
-        } else {
-            RequestLocationPermission();
-        }
 
 
         setSupportActionBar(toolbar);
