@@ -8,16 +8,29 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.ddd.Apis.ApiManager;
 import com.example.ddd.Base.BaseFragment;
+import com.example.ddd.Models.Medicine;
+import com.example.ddd.Models.Order;
+import com.example.ddd.Models.User;
+import com.example.ddd.Models.ali;
 import com.example.ddd.R;
 
 import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomeFragment extends BaseFragment {
 
@@ -29,6 +42,7 @@ public class HomeFragment extends BaseFragment {
     ArrayList<String> textList ;
     ArrayList<String> numberlist ;
     int num;
+
 
 
     public HomeFragment() {
@@ -47,10 +61,24 @@ public class HomeFragment extends BaseFragment {
         RestoreData();
 
 
+
+
         Search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                goToFragment(new PharmaciesFragment());
+                showProgressDialog("Loading...");
+                SaveDataToMutable();
+                Vm.CreateOrder();
+            }
+        });
+
+
+        Vm.Loading.observe(getActivity(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean aBoolean) {
+                if(aBoolean){
+                    hideProgressDialog();
+                }
             }
         });
 
@@ -81,12 +109,11 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-    private void init() {
 
+    private void init() {
         Search_btn = view.findViewById(R.id.Search_btn);
         linearLayout = view.findViewById(R.id.linearItem);
         addMore = view.findViewById(R.id.add_more);
-
     }
 
     @Override
@@ -124,8 +151,11 @@ public class HomeFragment extends BaseFragment {
         minus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                num = Integer.parseInt(Textnumber.getText().toString()) - 1;
-                Textnumber.setText("" +num);
+                if(num > 0){
+                    num = Integer.parseInt(Textnumber.getText().toString()) - 1;
+                    Textnumber.setText("" +num);
+                }
+
             }
         });
 
@@ -141,6 +171,7 @@ public class HomeFragment extends BaseFragment {
         linearLayout.addView(viewItem);
     }
 
+
     public void SaveDataToMutable(){
         textList = new ArrayList<>();
         numberlist = new ArrayList<>();
@@ -152,7 +183,6 @@ public class HomeFragment extends BaseFragment {
         }
         Vm.stringList = textList;
         Vm.numberList = numberlist;
-        Vm.mText.setValue(null);
         Vm.mText.setValue(Vm.stringList);
         Vm.mnum.setValue(Vm.numberList);
     }
@@ -166,5 +196,7 @@ public class HomeFragment extends BaseFragment {
         transaction.replace(R.id.fragment_container, fragment)
                 .commit();
     }
+
+
 
 }
