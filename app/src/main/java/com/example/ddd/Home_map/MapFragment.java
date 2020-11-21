@@ -5,6 +5,7 @@ import android.location.Location;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -41,7 +42,6 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         Vm = new ViewModelProvider(getActivity()).get(Home_Map_VM.class);
-
         view = inflater.inflate(R.layout.fr_map, container, false);
 
         init(savedInstanceState);
@@ -56,18 +56,14 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
         this.googleMap =googleMap;
         googleMap.setMyLocationEnabled(true);
 
-        if(Vm.MyLocation.getValue()!=null){
-            googleMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(Vm.MyLocation.getValue().getLatitude(),
-                    Vm.MyLocation.getValue().getLongitude())));
-            addMarker(Vm.MyLocation.getValue().getLatitude(),Vm.MyLocation.getValue().getLongitude(),"my location");
-        }
 
 
-        Vm.MyLocation.observe(getActivity(), new Observer<Location>() {
+        Vm.MyLocation.observe(getActivity(), new Observer<LatLng>() {
             @Override
-            public void onChanged(Location location) {
-                if(location!=null){
-
+            public void onChanged(LatLng latLng) {
+                if(latLng!=null){
+                    googleMap.animateCamera(CameraUpdateFactory.newLatLng(Vm.MyLocation.getValue()));
+                    addMarker(latLng,"my location");
                 }
             }
         });
@@ -115,11 +111,11 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
 
 
 
-    private void addMarker(double latitude, double longitude, String title) {
+    private void addMarker(LatLng latLng, String title) {
 
-        googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude))
+        googleMap.addMarker(new MarkerOptions().position(latLng)
                 .title(title).flat(true));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude,longitude),10));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
 
 
     }
