@@ -46,6 +46,7 @@ public class MapFragment extends BaseFragment implements OnMapReadyCallback {
 
         init(savedInstanceState);
 
+        
         return view;
     }
 

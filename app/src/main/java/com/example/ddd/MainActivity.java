@@ -102,7 +102,10 @@ public class MainActivity extends BaseActivity {
                 .addToBackStack(null);
         transaction.replace(R.id.fragment_container, fragment)
                 .commit();
+
     }
+
+
     public boolean IsLocationPermissionGranted() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
