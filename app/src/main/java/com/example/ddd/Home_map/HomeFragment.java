@@ -61,7 +61,30 @@ public class HomeFragment extends BaseFragment {
         RestoreData();
 
 
+        return view;
 
+    }
+
+    private void RestoreData() {
+        if (Vm.first.getValue() == 0) {
+            InflateLayout("", 0,false);
+            Vm.first.setValue(1);
+        }
+
+        if (Vm.mText.getValue() != null && Vm.mnum.getValue() != null ) {
+            InflateLayout(Vm.mText.getValue().get(0),Integer.parseInt(Vm.mnum.getValue().get(0)), false);
+            for (int i = 1; i < Vm.mText.getValue().size(); i++) {
+                InflateLayout(Vm.mText.getValue().get(i),Integer.parseInt(Vm.mnum.getValue().get(i)), true);
+            }
+        }
+    }
+
+
+    private void init() {
+
+        Search_btn = view.findViewById(R.id.Search_btn);
+        linearLayout = view.findViewById(R.id.linearItem);
+        addMore = view.findViewById(R.id.add_more);
 
         Search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,29 +114,6 @@ public class HomeFragment extends BaseFragment {
         });
 
 
-        return view;
-
-    }
-
-    private void RestoreData() {
-        if (Vm.first.getValue() == 0) {
-            InflateLayout("", 0,false);
-            Vm.first.setValue(1);
-        }
-
-        if (Vm.mText.getValue() != null && Vm.mnum.getValue() != null ) {
-            InflateLayout(Vm.mText.getValue().get(0),Integer.parseInt(Vm.mnum.getValue().get(0)), false);
-            for (int i = 1; i < Vm.mText.getValue().size(); i++) {
-                InflateLayout(Vm.mText.getValue().get(i),Integer.parseInt(Vm.mnum.getValue().get(i)), true);
-            }
-        }
-    }
-
-
-    private void init() {
-        Search_btn = view.findViewById(R.id.Search_btn);
-        linearLayout = view.findViewById(R.id.linearItem);
-        addMore = view.findViewById(R.id.add_more);
     }
 
     @Override
