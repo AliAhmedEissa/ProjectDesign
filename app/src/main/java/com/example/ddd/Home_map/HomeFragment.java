@@ -54,7 +54,6 @@ public class HomeFragment extends BaseFragment {
         RestoreData();
 
         return view;
-
     }
 
     private void RestoreData() {

@@ -4,15 +4,18 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,7 +31,9 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends BaseActivity {
+import static com.example.ddd.SplashActivity.MY_LOCATION_PERMISSIONS_REQUEST_Code;
+
+public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     Toolbar toolbar;
     public static MeowBottomNavigation bottomNavigation;
@@ -36,8 +41,6 @@ public class MainActivity extends BaseActivity {
 
     NavigationView navView;
     DrawerLayout drawerLayout;
-
-    public static final int MY_LOCATION_PERMISSIONS_REQUEST_Code = 200;
 
     // onCreate Method
     @Override
@@ -51,16 +54,11 @@ public class MainActivity extends BaseActivity {
         toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
+        navView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
-
-        if (IsLocationPermissionGranted()) {
-
-        } else {
-            RequestLocationPermission();
-        }
 
         setTitle("Home");
 
@@ -87,7 +85,6 @@ public class MainActivity extends BaseActivity {
         bottomNavigation.show(1, false);
     }
 
-
     private void goToFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager()
                 .beginTransaction()
@@ -96,59 +93,38 @@ public class MainActivity extends BaseActivity {
                 .commit();
     }
 
-    public boolean IsLocationPermissionGranted() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        return false;
-    }
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.Home:
+                goToFragment(new HomeFragment());
+                bottomNavigation.setVisibility(View.VISIBLE);
+                break;
+            case R.id.Profile:
+                goToFragment(new ProfileFragment());
+                bottomNavigation.setVisibility(View.GONE);
+                break;
+            case R.id.Pharmacies:
+                Toast.makeText(this, "All Pharmacies", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.Faq:
+                Toast.makeText(this, "Faq", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.aboutUs:
+                Toast.makeText(this, "About Us", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.SignOut:
+                Toast.makeText(this, "Sign Out", Toast.LENGTH_SHORT).show();
+                break;
 
-    public void RequestLocationPermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION)) {
-            // Show an explanation to the user *asynchronously* -- don't block
-            // this thread waiting for the user's response! After the user
-            // sees the explanation, try again to request the permission.
-            showMessage("Apps Want To Access Gps To Show Nearby Cafes",
-                    "ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            ActivityCompat.requestPermissions(MainActivity.this,
-                                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                                    MY_LOCATION_PERMISSIONS_REQUEST_Code);
-                        }
-                    }, true);
-
-        } else {
-            // No explanation needed, we can request the permission.
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_LOCATION_PERMISSIONS_REQUEST_Code);
         }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions,
-                                           int[] grantResults) {
-        switch (requestCode) {
-            case MY_LOCATION_PERMISSIONS_REQUEST_Code: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                    goToFragment(new HomeFragment());
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                    Toast.makeText(this, "Cannot Get User Location", Toast.LENGTH_SHORT)
-                            .show();
-                }
-                break;
-            }
-        }
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 
 //    @Override
