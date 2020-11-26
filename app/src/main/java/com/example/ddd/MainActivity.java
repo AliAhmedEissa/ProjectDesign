@@ -28,20 +28,16 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
-
-
 public class MainActivity extends BaseActivity {
 
     Toolbar toolbar;
-    MeowBottomNavigation bottomNavigation;
+    public static MeowBottomNavigation bottomNavigation;
     CardView button_search;
 
     NavigationView navView;
     DrawerLayout drawerLayout;
 
     public static final int MY_LOCATION_PERMISSIONS_REQUEST_Code = 200;
-
 
     // onCreate Method
     @Override
@@ -54,8 +50,6 @@ public class MainActivity extends BaseActivity {
         drawerLayout = findViewById(R.id.drawer_layout);
         toolbar = findViewById(R.id.toolbar);
 
-
-
         setSupportActionBar(toolbar);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -67,7 +61,6 @@ public class MainActivity extends BaseActivity {
         } else {
             RequestLocationPermission();
         }
-
 
         setTitle("Home");
 
@@ -101,9 +94,7 @@ public class MainActivity extends BaseActivity {
                 .addToBackStack(null);
         transaction.replace(R.id.fragment_container, fragment)
                 .commit();
-
     }
-
 
     public boolean IsLocationPermissionGranted() {
         if (ContextCompat.checkSelfPermission(this,
@@ -157,7 +148,6 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
             }
-
         }
     }
 

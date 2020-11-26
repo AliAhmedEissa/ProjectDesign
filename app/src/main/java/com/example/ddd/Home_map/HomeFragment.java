@@ -18,10 +18,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import com.example.ddd.Base.BaseFragment;
 import com.example.ddd.R;
 
 import java.util.ArrayList;
+
+import static com.example.ddd.MainActivity.bottomNavigation;
 
 public class HomeFragment extends BaseFragment {
 
@@ -37,12 +40,9 @@ public class HomeFragment extends BaseFragment {
     RadioGroup radioGroup;
     RadioButton radioButton;
 
-
-
     public HomeFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,14 +51,11 @@ public class HomeFragment extends BaseFragment {
 
         init();
 
-
         RestoreData();
-
 
         return view;
 
     }
-
 
     private void RestoreData() {
         if (Vm.first.getValue() == 0) {
@@ -74,9 +71,7 @@ public class HomeFragment extends BaseFragment {
         }
     }
 
-
     private void init() {
-
         Search_btn = view.findViewById(R.id.Search_btn);
         linearLayout = view.findViewById(R.id.linearItem);
         addMore = view.findViewById(R.id.add_more);
@@ -91,7 +86,6 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-
         Vm.Loading.observe(getActivity(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
@@ -100,7 +94,6 @@ public class HomeFragment extends BaseFragment {
                 }
             }
         });
-
 
         addMore.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,8 +110,6 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
-
-
     }
 
     public void findRadioButton(int radioId) {
@@ -129,9 +120,9 @@ public class HomeFragment extends BaseFragment {
             case R.id.radioButton_other:
                 Vm.radio.setValue(true);
                 goToFragment(new MapFragment());
+                bottomNavigation.show(2, false);
                 break;
         }
-
     }
 
     @Override
@@ -139,7 +130,6 @@ public class HomeFragment extends BaseFragment {
         super.onPause();
         SaveDataToMutable();
     }
-
 
     private void InflateLayout(String data , int numb , Boolean Visability)  {
         final View viewItem = getLayoutInflater().inflate(R.layout.edittextlayout, null, false);
@@ -149,7 +139,6 @@ public class HomeFragment extends BaseFragment {
         TextView Textnumber = viewItem.findViewById(R.id.number);
         ImageView plus = viewItem.findViewById(R.id.plus);
         ImageView imageClose = viewItem.findViewById(R.id.remove);
-
 
         Textnumber.setText(""+numb);
 
@@ -175,7 +164,6 @@ public class HomeFragment extends BaseFragment {
                     num = Integer.parseInt(Textnumber.getText().toString()) - 1;
                     Textnumber.setText("" +num);
                 }
-
             }
         });
 
@@ -184,13 +172,11 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View v) {
                 num = Integer.parseInt(Textnumber.getText().toString()) + 1;
                 Textnumber.setText("" +num);
-
             }
         });
 
         linearLayout.addView(viewItem);
     }
-
 
     public void SaveDataToMutable(){
         textList = new ArrayList<>();
@@ -207,7 +193,6 @@ public class HomeFragment extends BaseFragment {
         Vm.num.setValue(Vm.numberList);
     }
 
-
     private void goToFragment(Fragment fragment) {
         FragmentTransaction transaction = getActivity()
                 .getSupportFragmentManager()
@@ -216,7 +201,5 @@ public class HomeFragment extends BaseFragment {
         transaction.replace(R.id.fragment_container, fragment)
                 .commit();
     }
-
-
 
 }

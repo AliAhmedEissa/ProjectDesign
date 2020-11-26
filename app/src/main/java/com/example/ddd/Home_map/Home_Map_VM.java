@@ -41,27 +41,20 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
     public MutableLiveData<LatLng> MyLocation = new MutableLiveData<>(null);
     public MutableLiveData<String> Address = new MutableLiveData<>(null);
 
-
     public MutableLiveData<Boolean> Error = new MutableLiveData<>(false);
     public MutableLiveData<Boolean> Loading = new MutableLiveData<>(false);
     public MutableLiveData<Integer> first = new MutableLiveData<>(0);
 
     public MutableLiveData<Boolean> radio = new MutableLiveData<>(false);
 
-
-
-
     public List<String> stringList = new ArrayList<>();
     public List<String> numberList = new ArrayList<>();
     List<Medicine> medicineList ;
 
-
     GoogleApiClient googleApiClient;
     LocationRequest locationRequest;
 
-    Context context ;
-
-
+    Context context;
     public Home_Map_VM(@NonNull Application application) {
         super(application);
         context = application.getApplicationContext();
@@ -70,8 +63,6 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
     }
 
     public void CreateOrder(){
-
-
         SetOrderData();
 
         ApiManager.getApis().CreateOrder(SetOrderData()).enqueue(new Callback<Order>() {
@@ -87,8 +78,6 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
 
             }
         });
-
-
     }
 
     private Order SetOrderData() {
@@ -129,9 +118,7 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
         order.setMedicineList(medicineList);
 
         return order;
-
     }
-
 
   /*  public void pharmacy(Context context, double la, double lo) {
         nearpharmacy = new ArrayList<>();
@@ -160,7 +147,6 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         LocationServices.getFusedLocationProviderClient(context);
         LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
-
     }
 
     @Override
@@ -181,7 +167,6 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
         MyLocation.setValue(new LatLng(location.getLatitude(),location.getLongitude()));
     }
 
-
     public synchronized void buildApiClient() {
         googleApiClient = new GoogleApiClient.Builder(getApplication().getApplicationContext())
                 .addConnectionCallbacks(this)
@@ -191,11 +176,7 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
         googleApiClient.connect();
     }
 
-
-
-
     public void EncodeAddress(LatLng center) {
-
         String s = "";
         List<android.location.Address> addresses = null;
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
@@ -203,13 +184,10 @@ public class Home_Map_VM extends AndroidViewModel implements GoogleApiClient.OnC
             addresses = geocoder.getFromLocation(center.latitude, center.longitude, 1);
             s = addresses.get(0).getAddressLine(0);
             Address.setValue(s);
-
         } catch (IOException e) {
 
             e.printStackTrace();
         }
-
     }
-
 
 }
